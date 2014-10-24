@@ -1,5 +1,6 @@
 defmodule CitpWebsocket.Router do
   use Phoenix.Router
+  use Phoenix.Router.Socket, mount: "/ws"
 
   scope "/" do
     # Use the default browser stack.
@@ -7,6 +8,7 @@ defmodule CitpWebsocket.Router do
 
     # get "/", CitpWebsocket.PageController, :index
     get "/", CitpWebsocket.CitpController, :index
+    channel "channel", CitpWebsocket.ColorChannel
   end
 
   # Other scopes may use custom stacks.
