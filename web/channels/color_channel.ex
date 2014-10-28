@@ -1,7 +1,10 @@
 defmodule CitpWebsocket.ColorChannel do
   use Phoenix.Channel
 
-  def join(socket, "topic", _message) do
+  @topic "data_topic"
+  @channel "channel"
+
+  def join(socket, @topic, _message) do
     reply(socket, "join", %{content: "from elixir, joined 'topic' successfully"})
     {:ok, socket}
   end
@@ -10,4 +13,8 @@ defmodule CitpWebsocket.ColorChannel do
     reply(socket, "error", %{reason: "from elixir, failed to join topic"})
     {:error, socket, :unauthorized}
   end 
+
+  def send_color_data(data) when is_list(data) do
+    Phoenix.Channel.broadcast(@channel, @topic, "new:data", %{data: data})
+  end
 end
