@@ -2,6 +2,13 @@
   <h2>Welcome to CITP-WebSocket</h2>
 </div>
 
+<div id=status-wrapper><b>Status: </b><p id=status>Not Connected</p></div>
+
+<div id=chan1>no data</div>
+<div id=chan2>no data</div>
+<div id=chan3>no data</div>
+
+
 <script src="js/phoenix.js"></script>
 <script src="js/jquery-2.1.1.min.js"></script>
 <script>
@@ -12,15 +19,20 @@ $(document).ready(function() {
 
       channel.on("join", function(message) {
         console.log("Joined new topic: " + message.content);
+        $("#status").text("Joined topic");
         });
 
       channel.on("error", function(error) {
         console.log("Failed to join topic. Reason: " + error.reason);
+        $("#status").text("Failed to join topic");
         });
 
       channel.on("new:data", function(message) {
         console.log("Got new data message");
         console.log(message);
+        $("#chan1").text(message.data[0]);
+        $("#chan2").text(message.data[1]);
+        $("#chan3").text(message.data[2]);
         });
 
       });

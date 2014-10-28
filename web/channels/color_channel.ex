@@ -5,12 +5,12 @@ defmodule CitpWebsocket.ColorChannel do
   @channel "channel"
 
   def join(socket, @topic, _message) do
-    reply(socket, "join", %{content: "from elixir, joined 'topic' successfully"})
+    reply(socket, "join", %{content: "joined #{@topic} successfully"})
     {:ok, socket}
   end
 
   def join(socket, _no, _message) do
-    reply(socket, "error", %{reason: "from elixir, failed to join topic"})
+    reply(socket, "error", %{reason: "failed to join #{@topic}"})
     {:error, socket, :unauthorized}
   end 
 
