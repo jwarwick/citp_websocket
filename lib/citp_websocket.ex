@@ -11,6 +11,8 @@ defmodule CitpWebsocket do
       # worker(CitpWebsocket.Worker, [arg1, arg2, arg3])
     ]
 
+    CitpEventListener.start
+
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: CitpWebsocket.Supervisor]

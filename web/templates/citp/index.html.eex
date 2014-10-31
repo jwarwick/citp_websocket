@@ -2,11 +2,12 @@
   <h2>Welcome to CITP-WebSocket</h2>
 </div>
 
-<div id=status-wrapper><b>Status: </b><p id=status>Not Connected</p></div>
+<div id=status-wrapper><b>Websocket Status: </b><p id=status>Not Connected</p></div>
 
-<div id=chan1>no data</div>
-<div id=chan2>no data</div>
-<div id=chan3>no data</div>
+<div id=peer-wrapper><b>Peer Name: </b><p id=peer>Not Connected</p></div>
+
+<div id=universe-wrapper><b>Universe Name: </b><p id=universe>Universe 1</p></div>
+<div id=universe-data>None</div>
 
 
 <script src="js/phoenix.js"></script>
@@ -27,12 +28,15 @@ $(document).ready(function() {
         $("#status").text("Failed to join topic");
         });
 
+      channel.on("new:peer", function(message) {
+        console.log("New peer: " + message.name);
+        $("#peer").text(message.name);
+        });
+
       channel.on("new:data", function(message) {
-        console.log("Got new data message");
+        console.log("Got new data message for universe: " + message.universe);
         console.log(message);
-        $("#chan1").text(message.data[0]);
-        $("#chan2").text(message.data[1]);
-        $("#chan3").text(message.data[2]);
+        $("#universe-data").text(message.data.join(' '));
         });
 
       });

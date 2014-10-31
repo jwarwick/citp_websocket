@@ -15,7 +15,7 @@ defmodule CitpWebsocket.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {CitpWebsocket, []},
-     applications: [:phoenix, :cowboy, :logger]]
+     applications: [:phoenix, :cowboy, :logger, :ex_citp]]
   end
 
   # Specifies your project dependencies

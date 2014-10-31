@@ -14,7 +14,11 @@ defmodule CitpWebsocket.ColorChannel do
     {:error, socket, :unauthorized}
   end 
 
-  def send_color_data(data) when is_list(data) do
-    Phoenix.Channel.broadcast(@channel, @topic, "new:data", %{data: data})
+  def send_peer_name(name) do
+    Phoenix.Channel.broadcast(@channel, @topic, "new:peer", %{name: name})
+  end
+
+  def send_color_data(universe, data) when is_list(data) do
+    Phoenix.Channel.broadcast(@channel, @topic, "new:data", %{universe: universe, data: data})
   end
 end
