@@ -1,5 +1,6 @@
 %{"cowboy": {:hex, :cowboy, "1.0.0"},
   "cowlib": {:hex, :cowlib, "1.0.0"},
+  "ex_citp": {:git, "git://github.com/jwarwick/ex_citp.git", "e3cc359f9b999d3a57d80ac148e8791cfdda4e5e", []},
   "linguist": {:hex, :linguist, "0.1.2"},
   "phoenix": {:git, "git://github.com/phoenixframework/phoenix.git", "c5501f8a490b9e4cc9545df25cd5120e91d6389e", []},
   "plug": {:hex, :plug, "0.8.1"},

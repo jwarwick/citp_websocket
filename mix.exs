@@ -23,6 +23,7 @@ defmodule CitpWebsocket.Mixfile do
   # Type `mix help deps` for examples and options
   defp deps do
     [{:phoenix, github: "phoenixframework/phoenix"},
+      {:ex_citp, github: "jwarwick/ex_citp"},
      {:cowboy, "~> 1.0"}]
   end
 end
