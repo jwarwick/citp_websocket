@@ -7,11 +7,14 @@
 <div id=peer-wrapper><b>Peer Name: </b><p id=peer>Not Connected</p></div>
 
 <div id=universe-wrapper><b>Universe Name: </b><p id=universe>Universe 1</p></div>
-<div id=universe-data>None</div>
+<svg id=universe-data width="720" height="120">
+  <circle cx="40" cy="60" r="10"></circle>
+</svg>
 
 
 <script src="js/phoenix.js"></script>
 <script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/d3.min.js"></script>
 <script>
 $(document).ready(function() {
     console.log("starting...");
@@ -36,8 +39,31 @@ $(document).ready(function() {
       channel.on("new:data", function(message) {
         console.log("Got new data message for universe: " + message.universe);
         console.log(message);
-        $("#universe-data").text(message.data.join(' '));
-        });
+        var grouped_data = [];
+        var div = Math.floor(message.data.length/3);
+        for (idx=0; idx<div; idx++) {
+          var offset = idx*3;
+          grouped_data.push([message.data[offset], message.data[offset+1], message.data[offset+2]]);
+        }
+        var circles = d3.select("#universe-data").selectAll("circle")
+                        .data(grouped_data);
+
+        circles.enter().append("circle")
+               .attr("cx", function(d, i) {console.log("adding circle: " + i); return i * 20 + 40;})
+               .attr("cy", 60)
+               .attr("r", 10)
+               .style("fill", function(d) {return d3.rgb(d[0], d[1], d[2]);});
+
+        circles.exit().remove()
+ 
+        circles.style("fill", function(d) {return d3.rgb(d[0], d[1], d[2]);});
+
+       });
+      /*channel.on("new:data", function(message) {*/
+      /*  console.log("Got new data message for universe: " + message.universe);*/
+      /*  console.log(message);*/
+      /*  $("#universe-data").text(message.data.join(' '));*/
+      /*  });*/
 
       });
 
