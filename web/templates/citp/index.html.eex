@@ -8,7 +8,7 @@
 
 <div id=universe-wrapper><b>Universe Name: </b><p id=universe>Universe 1</p></div>
 <svg id=universe-data width="720" height="120">
-  <circle cx="40" cy="60" r="10"></circle>
+  <circle cx="10" cy="10" r="10"></circle>
 </svg>
 
 
@@ -45,14 +45,20 @@ $(document).ready(function() {
           var offset = idx*3;
           grouped_data.push([message.data[offset], message.data[offset+1], message.data[offset+2]]);
         }
+
+        var radius = 10;
+        var diameter = 2 * radius;
+        var x_offset = radius;
+        var y_offset = radius;
+        var width = 30;
+
         var circles = d3.select("#universe-data").selectAll("circle")
                         .data(grouped_data);
 
         circles.enter().append("circle")
-               .attr("cx", function(d, i) {console.log("adding circle: " + i); return i * 20 + 40;})
-               .attr("cy", 60)
-               .attr("r", 10)
-               .style("fill", function(d) {return d3.rgb(d[0], d[1], d[2]);});
+               .attr("cx", function(d, i) {return ((i%width) * diameter) + x_offset;})
+               .attr("cy", function(d, i) {return (Math.floor(i/width) * diameter) + y_offset;})
+               .attr("r", radius);
 
         circles.exit().remove()
  
