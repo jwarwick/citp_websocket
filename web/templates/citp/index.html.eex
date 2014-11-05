@@ -37,8 +37,8 @@ $(document).ready(function() {
         });
 
       channel.on("new:data", function(message) {
-        console.log("Got new data message for universe: " + message.universe);
-        console.log(message);
+        // console.log("Got new data message for universe: " + message.universe);
+        // console.log(message);
         var grouped_data = [];
         var div = Math.floor(message.data.length/3);
         for (idx=0; idx<div; idx++) {
