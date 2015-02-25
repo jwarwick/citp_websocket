@@ -5,6 +5,11 @@
 # is restricted to this project.
 use Mix.Config
 
+# Configure the event listener
+config :citp_event_listener,
+  skip_packets: 5
+
+
 # Configures the router
 config :phoenix, CitpWebsocket.Router,
   url: [host: "localhost"],
